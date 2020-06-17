@@ -79,10 +79,6 @@ namespace Lab456.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
     }
 
     public class ResetPasswordViewModel
