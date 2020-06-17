@@ -29,8 +29,30 @@
                <span class="lecturer">
                    @course.Category.Name
                </span>
+               <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance" id="join">Join</button>
            </div>
        </li>
        }
    </ul>
 </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                    .done(function () {
+                        button.removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Going");
+                    }).fail(function () {
+                        alert("Có lỗi xãy ra!");
+                    });
+            });
+        });
+    </script>
+    
+}
+
