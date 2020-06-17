@@ -30,7 +30,7 @@ namespace Lab456.Controllers
             var attendence = new Attendance
             {
                 CourseId = attendancesDto.CourseId,
-                AttendeeId = User.Identity.GetUserId()
+                AttendeeId = userId
             };
 
             _dbContext.Attendances.Add(attendence);
