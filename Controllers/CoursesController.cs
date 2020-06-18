@@ -79,7 +79,7 @@ namespace Lab456.Controllers
         {
             var userId = User.Identity.GetUserId();
             var courses = _dbContext.Courses
-                .Where(c => c.LecturerId == userId)
+                .Where(c => c.LecturerId == userId && c.IsCanceled == false)
                 .Include(l => l.Lecturer)
                 .Include(c => c.Category)
                 .ToList();

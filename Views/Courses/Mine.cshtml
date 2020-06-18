@@ -28,9 +28,38 @@
                 </div>
                 <div class="action">
                     <a href="@Url.Action("Edit", "Courses", new { id = course.Id})">Edit</a>
-                    <a href="">Delete</a>
+                    <a href="" class="js-cancel-course" data-course-id="@course.Id">Delete</a>
                 </div>
             </li>
         }
     </ul>
 </div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-course").click(function (e) {
+                e.preventDefault();
+                var link = $(e.target);
+                console.log(link);
+                console.log(link.parent("li"));
+                bootbox.confirm("Bạn có chắc muốn hủy học phần này?",
+                    function () {
+                        $.ajax({
+                            url: "/api/courses/" + link.attr("data-course-id"),
+                            method: "DELETE"
+                        })
+                            .done(function () {
+                                link.parents("li").fadeOut(function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function (err) {
+                                console.log(err);
+                                alert("!!!!!!!!!");
+                            })
+                    });
+            });
+        });
+    </script>
+}
