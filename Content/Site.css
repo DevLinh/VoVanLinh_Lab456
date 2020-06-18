@@ -52,6 +52,7 @@ textarea {
     color: white;
     width: 60px;
     border-radius: 10px;
+    margin-right: 10px;
 }
 
 .course > li .details {
