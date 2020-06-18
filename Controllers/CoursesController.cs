@@ -73,6 +73,24 @@ namespace Lab456.Controllers
             return View(viewModel);
         }
 
+        //Xem danh sách giang vien dang theo doi
+        public ActionResult Following()
+        {
+            var userId = User.Identity.GetUserId();
+            var followers = _dbContext.Followings
+                .Where(f => f.FollowerId == userId)
+                .Select(f => f.Followee)
+                .ToList();
+
+            var viewModel = new FollowingsViewModel
+            {
+                FollowingLectures = followers
+            };
+
+            return View(viewModel);
+        }
+
+
         //dabg sach bai hoc duoc tao ra tu nguoi dung hien tai, chu y khong quan tam ngya taoj
         [Authorize]
         public ActionResult Mine()
